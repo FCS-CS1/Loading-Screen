@@ -1,0 +1,93 @@
+//loading screen
+//Vicky Liu
+//Block 7 
+
+var angle = 0;
+var angleK = 0;
+var speed = 1;
+var col = {
+  r:255,
+  g:255,
+  b:255
+};
+var x = 1;
+
+function setup(){
+  createCanvas(600,600);
+  angleMode(DEGREES);
+}
+
+function draw(){
+  background(0);
+  noStroke();
+  //25 random colors crosses on the first layer
+  fill(random(col.r),random(col.g),random(col.b));//
+  for(var x = 1.5; x <= 6.5; ++x){
+    for(var y = 0; y <= 5; ++y){
+      cross((x-3+3*y)*width/15,(3*(x-3+3*y)+7-10*y)*width/15, width/15);
+    }
+   }
+  //25 black crosses on the second layer
+  fill(0);
+  for(var a = 5.5; a <=11.5; ++a){
+    for(var b = -3; b <= 2; ++b){
+      crossK((a+3*b)*width/15,(3*(a+3*b)+12-10*(b+3))*width/15,width/15);
+    }
+}
+  //a loading ball
+  linear();
+  //to move angles and loading ball
+  move();
+  //a signal as the END
+  wrap();
+}
+
+// one cross as a sample (1st layer)
+function cross(xPos,yPos,side){
+  push();
+  translate(xPos,yPos);
+  rotate(angle);
+  rect(-1/2*side,-1/2*side, side, side);
+  rect(-1/2*side,-3/2*side,side,side);
+  rect(1/2*side,-1/2*side,side,side);
+  rect(-3/2*side,-1/2*side,side,side);
+  rect(-1/2*side,1/2*side,side,side);
+  pop();
+}
+
+//another cross as a sample (2nd layer) 
+//differ from 1st layer: different variables angleK and angle of "rotating"
+function crossK(xPos,yPos,side){
+  push();
+  translate(xPos,yPos);
+  rotate(angleK);
+  rect(-1/2*side,-1/2*side, side, side);
+  rect(-1/2*side,-3/2*side,side,side);
+  rect(1/2*side,-1/2*side,side,side);
+  rect(-3/2*side,-1/2*side,side,side);
+  rect(-1/2*side,1/2*side,side,side);
+  pop();
+}
+
+function linear(){
+  fill(255);
+  ellipse(x,20/2,20,20);
+}
+
+function move(){
+  // two groups of crosses turn in opposite directions in same speed
+  angle += speed; 
+  angleK -= speed;
+  //to move loading bar 
+  x += 3;
+}
+
+function wrap(){
+  if(x>width){
+    clear(); //back to canvas
+    fill(0);
+    textStyle(BOLD);
+    textSize(50);
+    text("congrats!",width/3,height/2);
+  }
+}
