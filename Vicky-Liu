@@ -21,7 +21,7 @@ function draw(){
   background(0);
   noStroke();
   //25 random colors crosses on the first layer
-  fill(random(col.r),random(col.g),random(col.b));//
+  fill(random(255),random(255),random(255));//
   for(var x = 1.5; x <= 6.5; ++x){
     for(var y = 0; y <= 5; ++y){
       cross((x-3+3*y)*width/15,(3*(x-3+3*y)+7-10*y)*width/15, width/15);
